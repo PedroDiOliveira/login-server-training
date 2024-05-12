@@ -1,20 +1,14 @@
-<script >
-import cabecalho from "@/components/cabecalho.vue"
-import form from "@/components/form.vue"
+<script>
+import content from "@/components/content.vue"
 export default{
 components:{
-  cabecalho,
-  form
+  content
 }
 }
 </script>
 
 <template>
-  <div>
-    <cabecalho />
-    
-  </div>
-  <form/>
+    <content/>
 </template>
 
 <style> 

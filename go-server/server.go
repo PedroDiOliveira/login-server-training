@@ -1,0 +1,35 @@
+package main
+
+import (
+	"encoding/json"
+	"log"
+	"net/http"
+	"time"
+)
+
+type Router struct{}
+
+func (Router) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+	path := req.URL.Path
+
+	if path == "/cadaster" && req.Method == "POST" {
+		user := dataHandler(req)
+		insert(user)
+		response, err := json.Marshal(user)
+		if err != nil {
+			res.Write([]byte("Found an isue during JSON deploy"))
+		}
+		res.Write(response)
+	}
+}
+
+func RunServer() {
+	s := http.Server{
+		Addr:         ":8080",
+		Handler:      Router{},
+		WriteTimeout: 3 * time.Second,
+		ReadTimeout:  3 * time.Second,
+	}
+
+	log.Fatal(s.ListenAndServe())
+}
