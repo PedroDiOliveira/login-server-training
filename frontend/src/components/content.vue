@@ -2,14 +2,14 @@
     <div class="content">
         <div class="input">
         <h1>Cadastro</h1>
-        <form class ="formulario" id="formulario">
+        <form class="formulario" id="formulario" @submit.prevent="getFormValues">
             <div class="label">
                 <label for="username">Usuario: </label>
-                <input name="username" id="username" type="text" required>
+                <input v-model="user.username" name="username" id="username" type="text" required>
             </div>
             <div class="label">
                 <label for="idade">Idade: </label>
-                <input name="idade" id="idade" type="text" required>
+                <input v-model="user.idade" name="idade" id="idade" type="text" required>
             </div>    
 
             <div class="butao">
@@ -90,22 +90,36 @@
     }  
 </style>
 
-<script>
-    const forms = document.querySelector("#formulario");
-    forms.addEventListener('submit', event => {
-        event.preventDefault();
-
-        const formData = new FormData(forms);
-        const data = JSON.stringify(formData)
+<script >
+    export default{
+        data(){
+            return{
+                user:{
+                    username: '',
+                    idade: ''
+                },
+                
+            }
+        },
+        methods: {
+            getFormValues () {
+                const data = JSON.stringify(this.user)
         
-        fetch('https://reqres.in/api/users', {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body:data
-        }).then(res => res.json())
-          .then(data => console.log(data))
-          .catch(error => console.log(error))
-    });
+                fetch('http://127.0.0.1:8080/cadaster', {
+                    method: 'POST',
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    body:data
+                }).then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
+            
+            console.log(data)
+            console.log(this.user.username)
+            console.log(this.user.idade)
+            }
+        }
+    }
+
 </script>

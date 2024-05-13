@@ -1,11 +1,13 @@
 import './assets/main.css'
+import content from "./components/content.vue"
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
 
 const app = createApp(App)
 
-app.use(router)
+app.component({
+    "content": content
+})
 
 app.mount('#app')

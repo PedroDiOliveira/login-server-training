@@ -10,7 +10,7 @@ var DataBase []User
 
 type User struct {
 	Username string `json:username`
-	Idade    int    `json:idade`
+	Idade    string `json:idade`
 }
 
 func dataHandler(req *http.Request) User {
