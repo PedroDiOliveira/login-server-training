@@ -24,6 +24,9 @@ func (Router) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 			res.Write([]byte("Found an isue during JSON deploy"))
 		}
 		res.Write(response)
+	} else if path == "/cadaster" && req.Method == "GET" {
+		response, _ := json.Marshal(DataBase)
+		res.Write(response)
 	}
 }
 

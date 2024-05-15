@@ -9,8 +9,8 @@ import (
 var DataBase []User
 
 type User struct {
-	Username string `json:username`
-	Idade    string `json:idade`
+	Username string `json:"username"`
+	Idade    string `json:"idade"`
 }
 
 func dataHandler(req *http.Request) User {
